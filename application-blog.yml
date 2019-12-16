@@ -1,0 +1,33 @@
+server:
+  port: 9006
+spring:
+  application:
+    name: blog-product
+logging:
+  level:
+    vip.mafengwo.blog: debug
+eureka:
+  client: # 客户端进行Eureka注册的配置
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://mfw:pwd@localhost:9000/eureka
+  #      defaultZone: http://admin:enjoy@eureka1:7001/eureka,http://admin:enjoy@eureka2:7002/eureka,http://admin:enjoy@eureka3:7003/eureka
+  instance:
+    instance-id: blog-product-eureka
+    prefer-ip-address: true   #显示IP
+feign:
+  hystrix:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: # 可以被压缩的类型
+        - text/xml
+        - application/xml
+        - application/json
+      min-request-size: 2048 # 超过2048的字节进行压缩
+info:
+  app.name: blog-product
+  company.name: alan
+  build.artifactId: $project.artifactId$
+  build.modelVersion: $project.modelVersion$
